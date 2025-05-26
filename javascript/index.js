@@ -1,8 +1,6 @@
 
-function updateTime(){
-
-
-    
+let cityIntervalId = null;
+function updateTime(){   
 let losAngelesElement = document.querySelector("#los-angeles");
 if (losAngelesElement) {
 let losAngelesDateElement = losAngelesElement.querySelector(".date");
@@ -30,12 +28,14 @@ JoziTimeElement.innerHTML = JohannesburgTime.format("h:mm:ss [<small>]A[</small>
 }
 
 
-updateTime();
-setInterval(updateTime, 1000);
 
 
 function updateCity(event){
     let cityTimeZone = event.target.value;
+
+    if(cityTimeZone === "current"){
+        cityTimeZone = moment.tz.guess();
+    }
     //console.log(cityTimeZone);
     let cityTime = moment().tz(cityTimeZone);
     //console.log(cityTime.format("MMMM Do YYYY h:mm:ss A"));
@@ -52,7 +52,13 @@ function updateCity(event){
             <div class="time">${cityTime.format("h:mm:ss")} <small>${cityTime.format("A")}</small></div>
         </div>`
 
+        updateTime();
+
 }
+
+
+updateTime();
+setInterval(updateTime, 1000);
 
 let citiesSelectElement = document.querySelector("#city-select");
 citiesSelectElement.addEventListener("change",updateCity);
