@@ -1,5 +1,4 @@
 
-let cityIntervalId = null;
 function updateTime(){   
 let losAngelesElement = document.querySelector("#los-angeles");
 if (losAngelesElement) {
@@ -44,13 +43,15 @@ function updateCity(event){
 
     let citiesElement = document.querySelector("#cities");
     citiesElement.innerHTML = `
-        <div class="city">
+        <div class="city" style=" border-bottom: none;">
             <div>
                 <h2>${cityName}</h2>
                 <div class="date">${cityTime.format("MMMM Do YYYY")}</div>
             </div>
             <div class="time">${cityTime.format("h:mm:ss")} <small>${cityTime.format("A")}</small></div>
-        </div>`
+        </div>
+        <a href="/" style="color: #e91e63; text-decoration: none; font-weight: bold;">← Back to All Cities</a>
+`
 
         updateTime();
 
